@@ -1,0 +1,66 @@
+# ==============================
+# 🐍 Python
+# ==============================
+
+__pycache__/
+*.py[cod]
+*$py.class
+
+# ==============================
+# 🧪 Ambientes virtuais
+# ==============================
+
+.venv/
+venv/
+env/
+ENV/
+
+# ==============================
+# 🔐 Variáveis de ambiente
+# ==============================
+
+.env
+.env.*
+!.env.example
+
+# ==============================
+# 💻 IDEs e editores
+# ==============================
+
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# ==============================
+# 🖥️ Sistema operacional
+# ==============================
+
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# ==============================
+# 🧪 Testes / Coverage
+# ==============================
+
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+
+# ==============================
+# 📦 Build / Distribuição
+# ==============================
+
+build/
+dist/
+*.egg-info/
+
+# ==============================
+# 🔧 Ferramentas Python
+# ==============================
+
+.mypy_cache/
+.ruff_cache/
+.pytype/

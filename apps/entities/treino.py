@@ -11,14 +11,15 @@ class Treino:
         return self._nome
 
     @nome.setter
-    def nome(self,NOVOnome):
-        if not isinstance(NOVOnome, str):
+    def nome(self, novoNome):
+        if not isinstance(novoNome, str):
             raise ValueError("Nome inválido")
-        if NOVOnome.strip() == "":
+        novoNome = novoNome.strip().lower()
+        if novoNome == "":
             raise ValueError("Campo nome não pode ser vazio")
-        if len(NOVOnome) > 50:
-            raise ValueError("Quantidade de caracter excedida ")
-        self._nome = NOVOnome
+        if len(novoNome) > 50:
+            raise ValueError("Quantidade de caracteres excedida")
+        self._nome = novoNome
 
     @property 
     def id_aluno(self):
@@ -36,13 +37,17 @@ class Treino:
     def dia_semana(self):
         return self._dia_semana
     
+   
     @dia_semana.setter
-    def dia_semana(self,NovoDIASEMANA):
-        if not isinstance(NovoDIASEMANA, str):
-            raise ValueError("Nome inválido")
-        if NovoDIASEMANA.strip() == "":
-            raise ValueError("Campo nome não pode ser vazio")
-        if len(NovoDIASEMANA) > 20:
-            raise ValueError("Quantidade de caracter excedida")
-        self._dia_semana = NovoDIASEMANA
+    def dia_semana(self, novoDiaSemana):
+        if not isinstance(novoDiaSemana, str):
+            raise ValueError("Dia da semana inválido")
+        novoDiaSemana = novoDiaSemana.strip().lower()
+        if novoDiaSemana.endswith("-feira"):
+            novoDiaSemana = novoDiaSemana.replace("-feira", "")
+        if novoDiaSemana == "":
+            raise ValueError("Dia da semana não pode ser vazio")
+        if len(novoDiaSemana) > 20:
+            raise ValueError("Quantidade de caracteres excedida")
+        self._dia_semana = novoDiaSemana
         

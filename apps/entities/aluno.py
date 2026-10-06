@@ -52,7 +52,7 @@ class Aluno:
 
         novoPlano = novoPlano.strip()
 
-        if novoPlano.lower() not in ("Básico", "Intermediário", "Pro"):
+        if novoPlano.lower() not in ("básico", "intermediário", "pro"):
             raise ValueError("Plano inválido! Verifique e tente novamente")
 
         self._plano = novoPlano

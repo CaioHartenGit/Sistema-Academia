@@ -1,4 +1,4 @@
-from conexao import Conectar
+from apps.database.conexao import Conectar
 
 
 class AlunoRepository:
