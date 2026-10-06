@@ -72,5 +72,4 @@ Na raiz do projeto, inicie o menu com:
 ```bash
 python3 -m apps.main
 ```
-
 Execute como módulo para que os imports `apps.*` sejam resolvidos corretamente.
