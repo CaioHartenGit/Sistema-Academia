@@ -5,8 +5,8 @@ class Conectar:
         conn = psycopg.connect(
             host = "localhost",
             port = 5432,
-            dbname = "academia",
+            dbname = "seudatabase",
             user = "postgres",
-            password = "923252hm"
+            password = "suasenha"
         )
         return conn
