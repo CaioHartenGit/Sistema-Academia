@@ -97,13 +97,16 @@ def menu_aluno():
                 titulo("BUSCAR ALUNO POR ID")
                 id_aluno = int(input("        ID do aluno: "))
                 aluno = aluno_service.buscar_por_id(id_aluno)
-                print("\n        ALUNO ENCONTRADO!")
-                print(f"        ID:    {aluno.id_aluno}")
-                print(f"        Nome:  {aluno.nome}")
-                print(f"        Idade: {aluno.idade}")
-                print(f"        Plano: {aluno.plano}")
-                print(f"        Ativo: {aluno.ativo}")
-                pausar()
+                if aluno is None:
+                    print("Aluno não encontrado!")
+                else:
+                    print("\n        ALUNO ENCONTRADO!")
+                    print(f"        ID:    {aluno.id_aluno}")
+                    print(f"        Nome:  {aluno.nome}")
+                    print(f"        Idade: {aluno.idade}")
+                    print(f"        Plano: {aluno.plano}")
+                    print(f"        Ativo: {aluno.ativo}")
+                    pausar()
             # ------------------------------------------------
             # BUSCAR POR NOME
             # ------------------------------------------------
