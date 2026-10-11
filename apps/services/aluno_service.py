@@ -7,11 +7,14 @@ class AlunoService:
         self.repository = repository
 
     @staticmethod
-    def _converter_aluno(dados):
-        if dados is None:
-            return None
-
-        return Aluno(*dados)
+    def _converter_aluno( dados):
+        return Aluno(
+            dados["id"],
+            dados["nome"],
+            dados["idade"],
+            dados["plano"],
+            dados["ativo"]
+    )
 
     def cadastrar(self, nome, idade, plano):
         aluno = Aluno(None, nome, idade, plano)
@@ -25,10 +28,8 @@ class AlunoService:
         return self._converter_aluno(dados)
 
     def listar(self):
-        return [
-            self._converter_aluno(dados)
-            for dados in self.repository.listar()
-        ]
+        alunos = self.repository.listar()
+        return [self._converter_aluno(dados) for dados in alunos]
 
     def buscar_por_id(self, id_aluno):
         dados = self.repository.buscar_por_id(id_aluno)
@@ -55,9 +56,13 @@ class AlunoService:
         )
 
         return self._converter_aluno(dados)
-
+    
     def deletar(self, id_aluno):
         dados = self.repository.deletar(id_aluno)
+
+        if dados is None:
+            return None
+
         return self._converter_aluno(dados)
 
     def ativar(self, id_aluno):

@@ -81,7 +81,11 @@ Execute como módulo para que os imports `apps.*` sejam resolvidos corretamente.
 Execute o comando abaixo na raiz do projeto `SISTEMA-ACADEMIA`:
 
 ```bash
-python3 -m fastapi dev apps/routers/alunosAPI.py
+#alunos:
+python3 -m fastapi dev apps/main.py
+
+# exercicio:
+python3 -m fastapi dev apps/routers/exerciciosAPI.py
 ```
 
 **Por que executar como módulo?**

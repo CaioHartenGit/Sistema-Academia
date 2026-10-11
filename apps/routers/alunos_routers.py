@@ -1,4 +1,4 @@
-from fastapi import APIRouter, status
+from fastapi import APIRouter, status,HTTPException
 from apps.schemas.alunos_schemas import AlunoCreate, AlunoResponse
 from apps.repositories.aluno_repository import AlunoRepository
 from apps.services.aluno_service import AlunoService
@@ -24,9 +24,38 @@ def listar_alunos():
 # Buscar por ID
 @router.get("/{id_aluno}", response_model = AlunoResponse)
 def buscar_por_id(id_aluno: int):
-    aluno = aluno_service.buscar_por_id(id_aluno)
-    return aluno
+    aluno_por_id = aluno_service.buscar_por_id(id_aluno)
+    return aluno_por_id
 
+# Buscar por Nome
+@router.get("/nome/{nome}", response_model = list [AlunoResponse])
+def buscar_por_nome(nome: str):
+    aluno_por_nome = aluno_service.buscar_por_nome(nome)
+    return aluno_por_nome
+
+# Buscar por Plano
+@router.get("/plano/{plano}", response_model = list [AlunoResponse])
+def buscar_por_plano(plano: str):
+    aluno_por_plano = aluno_service.buscar_por_plano(plano)
+    return aluno_por_plano
+
+# Atualizar Aluno
+@router.put("/{id_aluno}", response_model = AlunoResponse)
+def atualizar_aluno(id_aluno: int, NovoAluno: AlunoCreate):
+    atualiza_aluno = aluno_service.atualizar(NovoAluno.nome, NovoAluno.idade, NovoAluno.plano, id_aluno)
+    return atualiza_aluno
+
+# Deletar Aluno
+@router.delete("/{id_aluno}", response_model = AlunoResponse)
+def deletar_aluno(id_aluno: int):
+    deleta_aluno = aluno_service.deletar(id_aluno)
+    if deleta_aluno is None:
+        raise HTTPException(
+            status_code = status.HTTP_404_NOT_FOUND,
+            detail = "Aluno não encontrado"
+        )
+    return deleta_aluno
+    
 
 
 
