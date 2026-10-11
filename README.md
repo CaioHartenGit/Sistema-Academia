@@ -73,3 +73,26 @@ Na raiz do projeto, inicie o menu com:
 python3 -m apps.main
 ```
 Execute como módulo para que os imports `apps.*` sejam resolvidos corretamente.
+
+## Desenvolvendo com FastAPI
+
+### Iniciar o servidor
+
+Execute o comando abaixo na raiz do projeto `SISTEMA-ACADEMIA`:
+
+```bash
+python3 -m fastapi dev apps/routers/alunosAPI.py
+```
+
+**Por que executar como módulo?**
+
+Essa forma de inicialização permite executar o FastAPI pelo ambiente Python selecionado e, no nosso projeto, resolveu o problema de importação dos módulos `apps.*`.
+
+### Acessar a documentação
+
+Com o servidor em execução, acesse:
+
+* **Swagger UI:** http://127.0.0.1:8000/docs
+* **OpenAPI JSON:** http://127.0.0.1:8000/openapi.json
+
+Para encerrar o servidor, pressione `Ctrl + C` no terminal.

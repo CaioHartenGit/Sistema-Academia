@@ -1,0 +1,9 @@
+[project]
+name = "sistema-academia"
+version = "0.1.0"
+description = "Sistema de gerenciamento de academia com Python, PostgreSQL e FastAPI"
+requires-python = ">=3.10"
+dependencies = [
+    "fastapi[standard]",
+    "psycopg[binary]",
+]
