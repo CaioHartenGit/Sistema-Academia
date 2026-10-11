@@ -65,3 +65,42 @@ def atualizar_aluno(id_aluno: int, alunoEntrada: AlunoEntrada):
         raise HTTPException( status_code = 404 , detail = "Não foi possivel atualizar o Aluno")
     return atualizar_aluno
 
+# Deletando aluno no Sistema
+@app.delete("/alunos/{id_aluno}")
+def deletar_aluno(id_aluno: int):
+    deleta = aluno_service.deletar(id_aluno)
+    if deleta is not None:
+        return{
+            "Mensagem": "Aluno deletado com sucesso",
+        }
+    else:
+       raise HTTPException(
+           status_code = 404,
+           detail = "Aluno não foi encontrado!"
+       )
+
+# Ativando aluno no Sistema
+@app.patch("/alunos/{id_aluno}/ativar")
+def ativar_aluno(id_aluno: int):
+    ativar = aluno_service.ativar(id_aluno)
+    if ativar is not None:
+        return{
+            "Mensagem": "Aluno ativado com sucesso"
+        }
+    else:
+        return{
+            "Mensagem": "Aluno não encontrado"
+        }
+
+# Desativando aluno no Sistema
+@app.patch("/alunos/{id_aluno}/desativar")
+def desativar_aluno(id_aluno: int):
+    desativar = aluno_service.desativar(id_aluno)
+    if desativar is not None:
+        return{
+            "Mensagem": "Aluno desativado com sucesso"
+        }
+    else:
+        return{
+            "Mensagem": "Aluno não encontrado"
+        }
