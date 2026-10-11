@@ -1,4 +1,5 @@
 from apps.database.conexao import Conectar
+from psycopg.rows import dict_row
 
 
 class AlunoRepository:
@@ -6,7 +7,7 @@ class AlunoRepository:
     def inserir(self, nome, idade, plano):
 
         conn = Conectar.conectar()
-        cursor = conn.cursor()
+        cursor = conn.cursor(row_factory=dict_row)
 
         try:
 
@@ -38,7 +39,7 @@ class AlunoRepository:
     def listar(self):
 
         conn = Conectar.conectar()
-        cursor = conn.cursor()
+        cursor = conn.cursor(row_factory=dict_row)
 
         try:
 
@@ -61,7 +62,7 @@ class AlunoRepository:
     def buscar_por_id(self, id_aluno):
 
         conn = Conectar.conectar()
-        cursor = conn.cursor()
+        cursor = conn.cursor(row_factory=dict_row)
 
         try:
 
@@ -86,7 +87,7 @@ class AlunoRepository:
     def atualizar(self, nome, idade, plano, id_aluno):
 
         conn = Conectar.conectar()
-        cursor = conn.cursor()
+        cursor = conn.cursor(row_factory=dict_row)
 
         try:
 
@@ -125,7 +126,7 @@ class AlunoRepository:
     def deletar(self, id_aluno):
 
         conn = Conectar.conectar()
-        cursor = conn.cursor()
+        cursor = conn.cursor(row_factory=dict_row)
 
         try:
 
@@ -161,7 +162,7 @@ class AlunoRepository:
     def ativar(self, id_aluno):
 
         conn = Conectar.conectar()
-        cursor = conn.cursor()
+        cursor = conn.cursor(row_factory=dict_row)
 
         try:
 
@@ -198,7 +199,7 @@ class AlunoRepository:
     def desativar(self, id_aluno):
 
         conn = Conectar.conectar()
-        cursor = conn.cursor()
+        cursor = conn.cursor(row_factory=dict_row)
 
         try:
 
@@ -235,7 +236,7 @@ class AlunoRepository:
     def buscar_por_nome(self, nome):
 
         conn = Conectar.conectar()
-        cursor = conn.cursor()
+        cursor = conn.cursor(row_factory=dict_row)
 
         try:
 
@@ -260,7 +261,7 @@ class AlunoRepository:
     def buscar_por_plano(self, plano):
 
         conn = Conectar.conectar()
-        cursor = conn.cursor()
+        cursor = conn.cursor(row_factory=dict_row)
 
         try:
 

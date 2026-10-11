@@ -1,7 +1,66 @@
-from fastapi import FastAPI,HTTPException,status
-from pydantic import BaseModel, field_validator
+from fastapi import APIRouter, status
+from apps.schemas.alunos_schemas import AlunoCreate, AlunoResponse
 from apps.repositories.aluno_repository import AlunoRepository
 from apps.services.aluno_service import AlunoService
+
+
+aluno_repository = AlunoRepository()
+aluno_service = AlunoService(aluno_repository)
+
+router = APIRouter(prefix = "/alunos", tags = ["Alunos"])
+
+# Criar aluno 
+@router.post("/",status_code = status.HTTP_201_CREATED, response_model = AlunoResponse)
+def cadastrar_alunos(alunoCreate: AlunoCreate):
+    cadastro_aluno = aluno_service.cadastrar(alunoCreate.nome,alunoCreate.idade,alunoCreate.plano)
+    return cadastro_aluno
+
+# Listar Alunos no Banco - PostgtesSQL
+@router.get("/", response_model = list [AlunoResponse])
+def listar_alunos():
+    listar_aluno = aluno_service.listar()
+    return listar_aluno
+
+# Buscar por ID
+@router.get("/{id_aluno}", response_model = AlunoResponse)
+def buscar_por_id(id_aluno: int):
+    aluno = aluno_service.buscar_por_id(id_aluno)
+    return aluno
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+'''
+from fastapi import FastAPI,HTTPException,status
+from apps.repositories.aluno_repository import AlunoRepository
+from apps.services.aluno_service import AlunoService
+from apps.schemas.alunos_schemas import AlunoCreate
 
 app = FastAPI()
 
@@ -22,44 +81,15 @@ def listar_alunos():
     alunos = aluno_service.listar()
     return alunos
 
-# Criando Aluno entrada
-class AlunoEntrada(BaseModel):
-    nome: str
-    idade: int
-    plano: str
-
-    @field_validator("nome")
-    @classmethod
-    def validar_nome(cls,nome):
-        nome = nome.lower().strip()
-        if nome == "":
-            raise ValueError("Nome não pode está vazio!")
-        return nome
-
-    @field_validator("idade")
-    @classmethod
-    def validar_idade(cls,idade):
-        if idade <=0:
-            raise ValueError("Idade não pode ser negativa e nem zero")
-        return idade
-    
-    @field_validator("plano")
-    @classmethod
-    def validar_plano(cls,plano):
-        plano = plano.lower().strip()
-        if plano not in ("básico", "intermediário", "pro"):
-            raise ValueError("Plano Inválido!")
-        return plano
-
 # Criando aluno
 @app.post("/alunos",status_code=status.HTTP_201_CREATED)
-def cadastrar_alunos(alunoEntrada: AlunoEntrada):
+def cadastrar_alunos(alunoEntrada: AlunoCreate):
     cadastro = aluno_service.cadastrar(alunoEntrada.nome,alunoEntrada.idade,alunoEntrada.plano)
     return cadastro
 
 # Atualizando aluno
 @app.put("/alunos/{id_aluno}")
-def atualizar_aluno(id_aluno: int, alunoEntrada: AlunoEntrada):
+def atualizar_aluno(id_aluno: int, alunoEntrada: AlunoCreate):
     atualizar_aluno = aluno_service.atualizar(alunoEntrada.nome,alunoEntrada.idade,alunoEntrada.plano,id_aluno)
     if atualizar_aluno is None:
         raise HTTPException( status_code = 404 , detail = "Não foi possivel atualizar o Aluno")
@@ -104,3 +134,4 @@ def desativar_aluno(id_aluno: int):
         return{
             "Mensagem": "Aluno não encontrado"
         }
+'''
